@@ -16,13 +16,17 @@ class TripsController < ApplicationController
   end
 
   post "/trips" do
-    @trip = Trip.create(params)
-    redirect "/trips/#{@trip.id}"
+    @trip = Trip.new(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], notes: params[:notes], user_id: session[:user_id])
+    if  !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
+      @trip.save
+      redirect "/trips/#{@trip.id}"
+    end
+    flash[:message] = "Form missing entries. Please fill out all spaces!"
+    redirect '/trips/new'
   end
 
   patch "/trips/:id" do
     @trip = Trip.find_by_id(params[:id])
-    #binding.pry
     if !@trip.destination.blank? || !@trip.start_date.blank? || !@trip.end_date.blank?
       @trip.update(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], notes: params[:notes])
     end
