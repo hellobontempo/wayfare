@@ -1,54 +1,58 @@
-require 'rack-flash'
 class UsersController < ApplicationController
-  use Rack::Flash
+  
 
   # GET: /users
   # get "/users" do
   #   erb :"/users/index.html"
   # end
 
-  # GET: /users/new
-  get "/signup" do
+  get "/users/new" do
     erb :"/users/new"
   end
 
   # POST: /users
-  post "/signup" do
+  post "/users" do
     user = User.new(params)
-
-      # make sure the user signed up with "valid" data 
       if user.email.blank? || user.password.blank? || User.find_by_email(params["email"])
-         # invalid login attempt 
-         flash[:message] = "Invalid Login, try again."
-         redirect '/signup'
+        flash[:message] = "Invalid Login. Try again, please!"
+        redirect '/users/new'
       else
-          #valid attempt 
-          u.save 
-          session[:user_id] = u.id# "log them in"
-          redirect '/movies' # redirect them elsewhere 
+        user.save
+        session[:user_id] = user.id
+        redirect "/users/#{user.id}" 
       end
-      
-  end
-    redirect "/users/#{user.id}"
   end
 
-  # GET: /users/5
+  get "/users/login" do
+    erb :'/users/login'
+  end
+
+  post "/login" do
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect "/users/#{@user.id}"
+    else
+      flash[:message] = "Invalid entry. Try again, please!"
+      redirect '/'
+    end
+  end
+
+  
   get "/users/:id" do
-    erb :"/users/show.html"
+    @user = User.find_by_id(params[:id])
+    erb :"/users/show"
   end
 
-  # GET: /users/5/edit
-  get "/users/:id/edit" do
-    erb :"/users/edit.html"
+  get '/logout' do
+    session.clear
+    redirect '/'
   end
 
-  # PATCH: /users/5
-  patch "/users/:id" do
-    redirect "/users/:id"
-  end
+  # # GET: /users/5/edit
+  # get "/users/:id/edit" do
+  #   erb :"/users/edit.html"
+  # end
 
-  # DELETE: /users/5/delete
-  delete "/users/:id/delete" do
-    redirect "/users"
-  end
+
 end

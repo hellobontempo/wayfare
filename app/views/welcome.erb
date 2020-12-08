@@ -1,8 +1,11 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %> 
 <h1> Welcome to Wayfare!</h1>
 
 <p>A travel log to plan and save all of your adventures.</p>
 
-<a href="users/login">Log In</a>
-<a href="users/signup">Sign Up</a>
-
+<a href="/users/login">Log In</a><br>
+<a href="/users/new">Sign Up</a><br>
+<br><br>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6ul-cZyuYq4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
