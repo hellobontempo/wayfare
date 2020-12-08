@@ -3,11 +3,15 @@
 <%end%> 
 <h1>Welcome, <%=@user.name%>!</h1>
 
+<h2>Trips:</h2><br>
 
+<%if @trips == []%>
+    <%@trips.each do |trip|%>
+        <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a><br>
+    <%end%>
+<%else%>
+    <a class="btn btn-dark"  href="/trips/<%=@trips.id%>"role="button"><%=@trips.destination%></a>
+<%end%><br><br>
+<hr>
 <br><br><br>
-<a class="btn btn-dark"  href="/trips/new"role="button">Create Trip</a><br><br>
-
-
-<a class="btn btn-dark"  href="/users/<%=@user.id%>/edit"role="button">Edit Name</a><br><br>
-
-<a class="btn btn-dark" href="/logout" role="button">Log Out</a>
+<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark"  href="/users/<%=@user.id%>/edit"role="button">Edit User Name</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>

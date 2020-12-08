@@ -16,5 +16,14 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  helpers do
+  
+    def flash_incomplete_form
+      flash[:message] = "Form missing entries - please fill out completely. 'Notes' may be left blank."
+    end
+
+  end
+
+
 
 end

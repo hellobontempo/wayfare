@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   get "/users/:id" do
     @user = User.find_by_id(params[:id])
+    @trips = Trip.find_by_user_id(params[:id])
     erb :"/users/show"
   end
 
@@ -33,7 +34,8 @@ class UsersController < ApplicationController
   post "/users" do
     user = User.new(params)
       if user.email.blank? || user.password.blank? || User.find_by_email(params["email"])
-        flash[:message] = "Invalid Login. Try again, please!"
+        flash_incomplete_form
+        #flash[:message] = "Invalid Login. Try again, please!"
         redirect '/users/new'
       else
         user.save
