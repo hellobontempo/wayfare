@@ -1,3 +1,10 @@
-<h1>Trip</h1>
+<h1>Trip to <%=@trip.destination%></h1>
 
-
+<p>Start Date: <%=@trip.start_date.strftime("%A, %B %e, %Y")%></p>
+<p>End Date: <%=@trip.end_date.strftime("%A, %B %e, %Y")%></p>
+<p>Duration: <%=(@trip.end_date - @trip.start_date).round%> Days</p>
+<p>Notes: <%=@trip.notes%></p>
+<br><br>
+<a class="btn btn-dark"  href="/trips/<%=@trip.id%>/edit" role="button">Edit Trip</a>
+<br><br>
+<a class="btn btn-dark"  href="/trips" role="button">Trip Index</a>

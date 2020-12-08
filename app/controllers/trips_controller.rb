@@ -1,34 +1,38 @@
 class TripsController < ApplicationController
 
   # GET: /trips
-  # get "/trips" do
-  #   erb :"/trips/index.html"
-  # end
+  get "/trips" do
+    @trips = Trip.all
+    erb :"/trips/index"
+  end
 
-  # GET: /trips/new
   get "/trips/new" do
     erb :"/trips/new"
   end
 
-  # POST: /trips
-  post "/trips" do
-    @trip = Trip.create(params)
-    redirect "/trips/#{trip.id}"
-  end
-
-  # GET: /trips/5
   get "/trips/:id" do
+    @trip = Trip.find_by_id(params[:id])
     erb :"/trips/show"
   end
 
-  # GET: /trips/5/edit
-  get "/trips/:id/edit" do
-    erb :"/trips/edit.html"
+  post "/trips" do
+    @trip = Trip.create(params)
+    redirect "/trips/#{@trip.id}"
   end
 
-  # PATCH: /trips/5
   patch "/trips/:id" do
-    redirect "/trips/:id"
+    @trip = Trip.find_by_id(params[:id])
+    #binding.pry
+    if !@trip.destination.blank? || !@trip.start_date.blank? || !@trip.end_date.blank?
+      @trip.update(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], notes: params[:notes])
+    end
+    flash[:message] = "Form missing entries. Please fill out all spaces!"
+    redirect "/trips/#{@trip.id}"
+  end
+
+  get "/trips/:id/edit" do
+    @trip = Trip.find_by_id(params[:id])
+    erb :"/trips/edit"
   end
 
   # DELETE: /trips/5/delete

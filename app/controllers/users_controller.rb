@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     erb :"/users/show"
   end
 
-
   post "/login" do
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
@@ -27,7 +26,7 @@ class UsersController < ApplicationController
       redirect "/users/#{@user.id}"
     else
       flash[:message] = "Invalid entry. Try again, please!"
-      redirect '/'
+      redirect '/users/login'
     end
   end
 
@@ -44,10 +43,14 @@ class UsersController < ApplicationController
   end
 
   patch "/users/:id" do
-    binding.pry
     @user= User.find_by_id(params[:id])
- 
-    #redirect "/users/#{@song.id}"    
+    if !@user.name.blank? && @user.authenticate(params[:password])
+      @user.update(name: params[:name])
+      #update user name here
+    else
+      flash[:message] = "Invalid Login. Try again, please!"
+      redirect "/users/#{@user.id}"
+    end  
   end
 
   get "/users/:id/edit" do

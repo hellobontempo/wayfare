@@ -1,1 +1,13 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<% if flash(:message) %>
+  <%= flash[:message] %>
+<% end %> 
+<h1>Edit your trip to <%=@trip.destination%><h1>
+
+<form action="/trips/<%=@trip.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <p><label>Destination:</label> <input type="text" name="destination" value="<%=@trip.destination%>"</p>
+    <p><label>Start Date:</label> <input type="date" name="start_date" value="<%@trip.start_date%>"></p>
+    <p><label>End Date:</label> <input type="date" name="end_date" value="<%=@trip.end_date%>"></p>
+    <p><label>Notes:</label> <br><textarea type="text" name="notes" value="<%=@trip.notes%>"></textarea></p>
+    <p><input type="submit" value="Update Trip"></p>
+</form>
