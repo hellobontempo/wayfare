@@ -1,23 +1,24 @@
 class TripsController < ApplicationController
 
   # GET: /trips
-  get "/trips" do
-    erb :"/trips/index.html"
-  end
+  # get "/trips" do
+  #   erb :"/trips/index.html"
+  # end
 
   # GET: /trips/new
   get "/trips/new" do
-    erb :"/trips/new.html"
+    erb :"/trips/new"
   end
 
   # POST: /trips
   post "/trips" do
-    redirect "/trips"
+    @trip = Trip.create(params)
+    redirect "/trips/#{trip.id}"
   end
 
   # GET: /trips/5
   get "/trips/:id" do
-    erb :"/trips/show.html"
+    erb :"/trips/show"
   end
 
   # GET: /trips/5/edit

@@ -1,1 +1,10 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h1>Create a trip:</h1>
+
+<form action="/trips" method="POST">
+  <p><label>Destination:</label><input type="text" name="destination"></p>
+  <p><label>Start Date:</label><input type="date" name="start_date"></p>
+  <p><label>End Date:</label><input type="date" name="end_date"></p>
+  <p><label>Notes:</label><br><textarea type="text" name="notes"></textarea></p>
+  <p><input type="submit" value="Create Trip"></p>
+</form>
+

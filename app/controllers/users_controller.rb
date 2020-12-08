@@ -10,22 +10,15 @@ class UsersController < ApplicationController
     erb :"/users/new"
   end
 
-  # POST: /users
-  post "/users" do
-    user = User.new(params)
-      if user.email.blank? || user.password.blank? || User.find_by_email(params["email"])
-        flash[:message] = "Invalid Login. Try again, please!"
-        redirect '/users/new'
-      else
-        user.save
-        session[:user_id] = user.id
-        redirect "/users/#{user.id}" 
-      end
-  end
-
   get "/users/login" do
     erb :'/users/login'
   end
+
+  get "/users/:id" do
+    @user = User.find_by_id(params[:id])
+    erb :"/users/show"
+  end
+
 
   post "/login" do
     @user = User.find_by(email: params[:email])
@@ -38,21 +31,36 @@ class UsersController < ApplicationController
     end
   end
 
-  
-  get "/users/:id" do
-    @user = User.find_by_id(params[:id])
-    erb :"/users/show"
+  post "/users" do
+    user = User.new(params)
+      if user.email.blank? || user.password.blank? || User.find_by_email(params["email"])
+        flash[:message] = "Invalid Login. Try again, please!"
+        redirect '/users/new'
+      else
+        user.save
+        session[:user_id] = user.id
+        redirect "/users/#{user.id}" 
+      end
+  end
+
+  patch "/users/:id" do
+    binding.pry
+    @user= User.find_by_id(params[:id])
+ 
+    #redirect "/users/#{@song.id}"    
+  end
+
+  get "/users/:id/edit" do
+    @user= User.find_by_id(params[:id])
+    erb :"/users/edit"
   end
 
   get '/logout' do
-    session.clear
+    session.delete(:user_id)
     redirect '/'
   end
 
-  # # GET: /users/5/edit
-  # get "/users/:id/edit" do
-  #   erb :"/users/edit.html"
-  # end
-
+ 
+ 
 
 end
