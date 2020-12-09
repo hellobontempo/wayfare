@@ -16,13 +16,33 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  helpers do
+  helpers do #accessible by all views
   
     def flash_incomplete_form
-      flash[:message] = "Form missing entries - please fill out completely. 'Notes' may be left blank."
+      flash[:message] = "*Error* Form missing entries - please fill out completely."
     end
 
+
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user   #memoization
+      @current_user ||=  User.find(session[:user_id]) if session[:user_id]
+      #if @current_user
+      #@current_user 
+      #else 
+      #@current_user =  User.find(session[:user_id])
+      #end
+      end
   end
+
+  private 
+    def redirect_if_not_logged_in
+        if !logged_in?
+            redirect '/'
+        end
+    end
 
 
 

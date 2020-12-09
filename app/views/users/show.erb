@@ -5,12 +5,15 @@
 
 <h2>Trips:</h2><br>
 
-<%if @trips == []%>
+<%if @trips.length >= 1%>
     <%@trips.each do |trip|%>
-        <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a><br>
+        <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a> 
     <%end%>
+<%elsif @trips.length == 1 %>
+    <%trip = @trips[0]%>
+    <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a>
 <%else%>
-    <a class="btn btn-dark"  href="/trips/<%=@trips.id%>"role="button"><%=@trips.destination%></a>
+    <p>You don't have any trips yet!</p>
 <%end%><br><br>
 <hr>
 <br><br><br>

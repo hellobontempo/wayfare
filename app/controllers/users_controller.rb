@@ -15,8 +15,9 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id" do
+    redirect_if_not_logged_in
     @user = User.find_by_id(params[:id])
-    @trips = Trip.find_by_user_id(params[:id])
+    @trips = Trip.all.select{|trip| trip.user_id == @user.id}
     erb :"/users/show"
   end
 
@@ -33,10 +34,12 @@ class UsersController < ApplicationController
 
   post "/users" do
     user = User.new(params)
-      if user.email.blank? || user.password.blank? || User.find_by_email(params["email"])
+      if user.email.blank? || user.password.blank?
         flash_incomplete_form
-        #flash[:message] = "Invalid Login. Try again, please!"
-        redirect '/users/new'
+       redirect '/users/new'
+      elsif User.find_by_email(params["email"])
+        flash[:message] = "You already have an account!"
+        redirect '/users/login'
       else
         user.save
         session[:user_id] = user.id
@@ -44,23 +47,8 @@ class UsersController < ApplicationController
       end
   end
 
-  patch "/users/:id" do
-    @user= User.find_by_id(params[:id])
-    if !@user.name.blank? && @user.authenticate(params[:password])
-      @user.update(name: params[:name])
-      #update user name here
-    else
-      flash[:message] = "Invalid Login. Try again, please!"
-      redirect "/users/#{@user.id}"
-    end  
-  end
-
-  get "/users/:id/edit" do
-    @user= User.find_by_id(params[:id])
-    erb :"/users/edit"
-  end
-
   get '/logout' do
+    redirect_if_not_logged_in
     session.delete(:user_id)
     redirect '/'
   end
