@@ -18,7 +18,7 @@ class TripsController < ApplicationController
   end
 
   post "/trips" do
-    redirect_if_not_authorized
+    redirect_if_not_logged_in
     @trip = Trip.new(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date], notes: params[:notes], user_id: session[:user_id])
     if  !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
       @trip.save
