@@ -56,8 +56,6 @@ class TripsController < ApplicationController
     def redirect_if_not_authorized
         if @trip.user != current_user
             redirect '/trips'
-        else !!current_user 
-            redirect '/'
         end
     end
 end
