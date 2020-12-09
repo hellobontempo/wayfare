@@ -11,11 +11,8 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    if logged_in?
-      redirect "users/#{current_user.id}"
-    else
-      erb :welcome
-    end
+    redirect_if_logged_in
+    erb :welcome
   end
 
   get '/error' do
@@ -44,5 +41,12 @@ class ApplicationController < Sinatra::Base
     def redirect_if_not_authorized
       redirect '/trips' if @trip.user != current_user
     end
+
+    def redirect_if_logged_in
+      if logged_in?
+        redirect "users/#{current_user.id}"
+      end
+    end
+
   end
 end
