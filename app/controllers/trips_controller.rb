@@ -48,14 +48,9 @@ class TripsController < ApplicationController
   delete '/trips/:id' do 
     @trip = Trip.find_by_id(params[:id])
     @user = User.find_by_id(@trip.user_id)
+    redirect_if_not_authorized
     @trip.destroy
     redirect "users/#{@user.id}"
   end
   
-  private 
-    def redirect_if_not_authorized
-        if @trip.user != current_user
-            redirect '/trips'
-        end
-    end
 end

@@ -15,13 +15,13 @@ class UsersController < ApplicationController
   end
 
   get "/users/:id" do
-    if !logged_in?
-      redirect_if_not_logged_in
-    else 
-      @user = User.find_by_id(params[:id])
+    @user = User.find_by_id(params[:id])
+      if @user != current_user
+        erb :error
+      elsif 
       @trips = Trip.all{|trip| trip.user_id == @user.id}
       erb :"/users/show"
-    end
+      end
   end
 
   post "/login" do 
@@ -41,8 +41,8 @@ class UsersController < ApplicationController
         flash_incomplete_form
         redirect '/users/new'
       elsif User.find_by_email(params["email"])
-        flash[:message] = "You already have an account!"
-        redirect '/users/login'
+        flash[:message] = "Account already exists with that email."
+        redirect '/'
       else
         user.save
         session[:user_id] = user.id

@@ -13,7 +13,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :welcome
+    if logged_in?
+      redirect "users/#{current_user.id}"
+    else
+      erb :welcome
+    end
   end
 
   helpers do #accessible by all views
@@ -23,18 +27,24 @@ class ApplicationController < Sinatra::Base
     end
 
     def logged_in?
-      !!session[:user_id]
+      !!current_user
     end
 
     def current_user
-      User.find(session[:user_id])
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
     def redirect_if_not_logged_in
+      if !logged_in?
         erb :error
+      end
     end
+
+    def redirect_if_not_authorized
+      if @trip.user != current_user
+        redirect '/trips'
+      end
+    end
+
   end
-
-
-
 end
