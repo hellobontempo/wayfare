@@ -1,9 +1,9 @@
 <%if flash(:message)%>
   <%=flash[:message]%>
 <%end%> 
-<h1>Welcome, <%=@user.name%>!</h1>
+<h1>Hi, <%=@user.name%>!</h1>
 
-<h2>Trips:</h2><br>
+<h2>Trips &hearts;</h2><br>
 
 <%if @trips.length >= 1%>
     <%@trips.each do |trip|%>
@@ -17,4 +17,4 @@
 <%end%><br><br>
 <hr>
 <br><br><br>
-<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark"  href="/users/<%=@user.id%>/edit"role="button">Edit User Name</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
+<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>

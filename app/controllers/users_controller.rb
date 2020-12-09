@@ -48,8 +48,8 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    redirect_if_not_logged_in
-    session.delete(:user_id)
+    session.clear
+    flash[:message] = "You have successfully logged out."
     redirect '/'
   end
 
