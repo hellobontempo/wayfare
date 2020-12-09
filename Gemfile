@@ -12,6 +12,7 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'sinatra-flash'
+gem 'rubocop'
 
 group :test do
   gem 'rspec'
