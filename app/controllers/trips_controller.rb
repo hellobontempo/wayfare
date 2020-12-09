@@ -1,15 +1,18 @@
 class TripsController < ApplicationController
   get '/trips' do
+    redirect_if_not_logged_in
     @trips = Trip.order(:user_id)
     @user = current_user
     erb :"/trips/index"
   end
 
   get '/trips/new' do
+    redirect_if_not_logged_in
     erb :"/trips/new"
   end
 
   get '/trips/:id' do
+    redirect_if_not_logged_in
     @trip = Trip.find_by_id(params[:id])
     @user = User.find_by_id(@trip.user_id)
     erb :"/trips/show"

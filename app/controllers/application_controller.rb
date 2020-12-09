@@ -18,6 +18,10 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  get '/error' do
+    erb :error
+  end
+
   helpers do
     def flash_incomplete_form
       flash[:message] = '*Error* Form missing entries - please fill out completely.'
@@ -32,8 +36,9 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_logged_in
-      return if logged_in?
-      erb :error
+      if !logged_in?
+        redirect '/error'
+      end
     end
 
     def redirect_if_not_authorized
