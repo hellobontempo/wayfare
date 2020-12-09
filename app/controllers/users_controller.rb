@@ -1,56 +1,50 @@
 class UsersController < ApplicationController
-  
-
-  get "/users/new" do
+  get '/users/new' do
     erb :"/users/new"
   end
 
-  get "/users/login" do
+  get '/users/login' do
     erb :'/users/login'
   end
 
-  get "/users/:id" do
+  get '/users/:id' do
     @user = User.find_by_id(params[:id])
-      if @user != current_user
-        erb :error
-      else
-        erb :"/users/show"
-      end
+    if @user != current_user
+      erb :error
+    else
+      erb :"/users/show"
+    end
   end
 
-  post "/login" do 
+  post '/login' do
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect "/users/#{@user.id}"
     else
-      flash[:message] = "Invalid entry. Try again, please!"
+      flash[:message] = 'Invalid entry. Try again, please!'
       redirect '/users/login'
     end
   end
 
-  post "/users" do
+  post '/users' do
     user = User.new(params)
-      if user.email.blank? || user.password.blank?
-        flash_incomplete_form
-        redirect '/users/new'
-      elsif User.find_by_email(params["email"])
-        flash[:message] = "Account already exists with that email."
-        redirect '/'
-      else
-        user.save
-        session[:user_id] = user.id
-        redirect "/users/#{user.id}" 
-      end
+    if user.email.blank? || user.password.blank?
+      flash_incomplete_form
+      redirect '/users/new'
+    elsif User.find_by_email(params['email'])
+      flash[:message] = 'Account already exists with that email.'
+      redirect '/'
+    else
+      user.save
+      session[:user_id] = user.id
+      redirect "/users/#{user.id}"
+    end
   end
 
   get '/logout' do
     session.clear
-    flash[:message] = "You have successfully logged out."
+    flash[:message] = 'You have successfully logged out.'
     redirect '/'
   end
-
- 
- 
-
 end

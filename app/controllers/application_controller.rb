@@ -1,8 +1,6 @@
 require './config/environment'
 # require 'sinatra/flash'
 class ApplicationController < Sinatra::Base
-  
-
   configure do
     enable :sessions
     set :public_folder, 'public'
@@ -12,7 +10,7 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'wlajal23ljwljlwirg2'
   end
 
-  get "/" do
+  get '/' do
     if logged_in?
       redirect "users/#{current_user.id}"
     else
@@ -20,10 +18,9 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-  helpers do 
-  
+  helpers do
     def flash_incomplete_form
-      flash[:message] = "*Error* Form missing entries - please fill out completely."
+      flash[:message] = '*Error* Form missing entries - please fill out completely.'
     end
 
     def logged_in?
@@ -35,16 +32,12 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_logged_in
-      if !logged_in?
-        erb :error
-      end
+      return if logged_in?
+      erb :error
     end
 
     def redirect_if_not_authorized
-      if @trip.user != current_user
-        redirect '/trips'
-      end
+      redirect '/trips' if @trip.user != current_user
     end
-
   end
 end
