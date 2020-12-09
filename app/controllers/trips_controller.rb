@@ -20,8 +20,9 @@ class TripsController < ApplicationController
 
   post '/trips' do
     redirect_if_not_logged_in
+    notes_empty
     @trip = Trip.new(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date],
-                     notes: params[:notes], user_id: session[:user_id])
+                     notes: @note, user_id: session[:user_id])
     if !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
       @trip.save
       redirect "/trips/#{@trip.id}"
@@ -55,4 +56,16 @@ class TripsController < ApplicationController
     @trip.destroy
     redirect "users/#{@user.id}"
   end
+
+  
+  helpers do 
+    def notes_empty
+      if params[:notes] == ""
+          @note = "None"
+      else 
+        @note = params[:notes]
+      end
+    end
+  end
+
 end
