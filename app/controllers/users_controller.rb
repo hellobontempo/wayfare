@@ -18,9 +18,8 @@ class UsersController < ApplicationController
     @user = User.find_by_id(params[:id])
       if @user != current_user
         erb :error
-      elsif 
-      @trips = Trip.all{|trip| trip.user_id == @user.id}
-      erb :"/users/show"
+      else
+        erb :"/users/show"
       end
   end
 

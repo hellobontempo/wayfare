@@ -1,3 +1,4 @@
+
 <%if flash(:message)%>
   <%=flash[:message]%>
 <%end%> 
@@ -5,17 +6,10 @@
 
 <h2>Trips &hearts;</h2><br>
 
-<%@user_trips = @trips.select{|trip| trip.user_id == @user.id}%>
-<%if @user_trips.length >= 1%>
-    <%@user_trips.each do |trip|%>
-        <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a> 
-    <%end%>
-<%elsif @user_trips.length == 1 %>
-    <%trip = @trips[0]%>
-    <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a>
-<%else%>
-    <p>You don't have any trips yet!</p>
-<%end%><br><br>
-<hr>
+<%@user.trips.each do |trip|%>
+  <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a><br><br>
+<%end%>
 <br><br><br>
+<hr>
+
 <a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
