@@ -22,24 +22,16 @@ class ApplicationController < Sinatra::Base
       flash[:message] = "*Error* Form missing entries - please fill out completely."
     end
 
-
     def logged_in?
-      !!current_user
+      !!session[:user_id]
     end
 
-    def current_user   #memoization
-      @current_user ||=  User.find(session[:user_id]) if session[:user_id]
-      #if @current_user
-      #@current_user 
-      #else 
-      #@current_user =  User.find(session[:user_id])
-      #end
-      end
+    def current_user
+      User.find(session[:user_id])
+    end
 
     def redirect_if_not_logged_in
-        if !logged_in?
-          erb :error
-        end
+        erb :error
     end
   end
 

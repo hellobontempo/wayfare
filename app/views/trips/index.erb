@@ -1,5 +1,12 @@
 <h1>Index of Trips</h2>
 
+
 <%@trips.each do |trip|%>
     <a class="btn btn-dark"  href="/trips/<%=trip.id%>" role="button"><%=trip.destination%></a><br><br>
 <%end%>
+
+<br><br><br>
+<hr>
+
+<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a>
+<a class="btn btn-dark"  href="/users/<%=@user.id%>" role="button">Return to My Page</a>

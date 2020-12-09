@@ -5,11 +5,12 @@
 
 <h2>Trips &hearts;</h2><br>
 
-<%if @trips.length >= 1%>
-    <%@trips.each do |trip|%>
+<%@user_trips = @trips.select{|trip| trip.user_id == @user.id}%>
+<%if @user_trips.length >= 1%>
+    <%@user_trips.each do |trip|%>
         <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a> 
     <%end%>
-<%elsif @trips.length == 1 %>
+<%elsif @user_trips.length == 1 %>
     <%trip = @trips[0]%>
     <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a>
 <%else%>

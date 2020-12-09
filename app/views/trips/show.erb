@@ -1,5 +1,6 @@
-<a class="btn btn-dark"  href="/users/<%=@user.id%>" role="button">Return to User Page</a><br><br><br>
+<a class="btn btn-dark"  href="/trips" role="button">View All Trips</a>
 
+<hr>
 <h1>Trip to <%=@trip.destination%></h1>
 
 <p>Start Date: <%=@trip.start_date.strftime("%A, %B %e, %Y")%></p>
@@ -11,12 +12,15 @@
 
 
 <%if @trip.user == current_user%>
-<a class="btn btn-dark"  href="/trips/<%=@trip.id%>/edit" role="button">Edit Trip</a>
-<br><br>
-
+   <a class="btn btn-dark"  href="/trips/<%=@trip.id%>/edit" role="button">Edit Trip</a>
+   <br><br>
    <form method="POST" action="/trips/<%= @trip.id %>">
       <input type="hidden" name="_method" value="delete">
       <input class="btn btn-dark" type="submit" value="Delete Trip">
    </form>
+   <br><br><br>
+   <a class="btn btn-dark"  href="/users/<%=@user.id%>" role="button">Return to My Page</a>
+<%else%>
+   <%="Trip made by #{@trip.user.name}"%>
 
 <% end %>
