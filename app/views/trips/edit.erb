@@ -1,11 +1,11 @@
 <% if flash(:message) %>
   <p style="color:red;"><%=flash[:message]%></p>
 <% end %> <br>
-<h1>Edit your trip to <%=@trip.destination%></h1>
+<h1>Edit your trip to <%=@trip.name%></h1>
 
 <form action="/trips/<%=@trip.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    <p><label>Destination:</label> <input type="text" name="trip[destination]" value="<%=@trip.destination%>"></p>
+    <p><label>Destination:</label> <input type="text" name="trip[name]" value="<%=@trip.name%>"></p>
     <p><label>Start Date:</label> <input type="date" name="trip[start_date]" value="<%=@trip.start_date%>"></p>
     <p><label>End Date:</label> <input type="date" name="trip[end_date]" value="<%=@trip.end_date%>"></p>
     <p><label>*Select a Resort:</label><br>

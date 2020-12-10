@@ -24,7 +24,7 @@ class TripsController < ApplicationController
     redirect_if_not_logged_in
     notes_empty
     @trip = Trip.new(params[:trip])
-    if !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
+    if !@trip.name.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
       @trip.notes = @note
       @trip.user_id = session[:user_id]
       @trip.resort_ids = params[:resorts]
@@ -38,7 +38,7 @@ class TripsController < ApplicationController
   patch '/trips/:id' do
     @trip = Trip.find_by_id(params[:id])
     redirect_if_not_authorized
-    if !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
+    if !@trip.name.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
       @trip.notes = params[:notes]
       @trip.update(params[:trip])
       @trip.resort_ids = params[:resorts]
