@@ -3,11 +3,14 @@
 <hr>
 <h1>Trip to <%=@trip.destination%></h1>
 
-<p>Start Date: <%=@trip.start_date.strftime("%A, %B %e, %Y")%></p>
-<p>End Date: <%=@trip.end_date.strftime("%A, %B %e, %Y")%></p>
-<p>Duration: <%=(@trip.end_date - @trip.start_date).round%> Days</p>
-<p>Resort: <%=@resort.name%></p>
-<p>Notes: <%=@trip.notes%></p>
+   <p>Start Date: <%=@trip.start_date.strftime("%A, %B %e, %Y")%></p>
+   <p>End Date: <%=@trip.end_date.strftime("%A, %B %e, %Y")%></p>
+   <p>Duration: <%=(@trip.end_date - @trip.start_date).round%> Days</p>
+   <p>Resort(s):<br>
+      <%@resorts.each do |resort|%>
+         <%=resort.name%><br>
+      <%end%>
+   <p>Notes: <%=@trip.notes%></p>
 <br><br>
 
 

@@ -7,13 +7,12 @@
   <p><label>Destination:</label> <input type="text" name="trip[destination]"></p>
   <p><label>Start Date:</label> <input type="date" name="trip[start_date]"></p>
   <p><label>End Date:</label> <input type="date" name="trip[end_date]"></p>
-  <p><label>Choose a Resort:</label> 
-        <select name="resort_id">
+  <p><label>*Select a Resort:</label><br>
           <%@resorts.each do |resort|%>
-            <option value="<%=resort.id%>"><%=resort.name%></option>
+            <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>"><%=resort.name%><br>
           <%end%>
-            <option value="resort">N/A</option>
-        </select>
+    
+     
   <p><label>*Notes:</label><br><textarea type="text" name="notes"></textarea><br><small>*not required</small></p>
   <p><input type="submit" value="Create Trip"></p>
 </form>
