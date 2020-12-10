@@ -7,5 +7,6 @@ end
 use Rack::MethodOverride
 
 run ApplicationController
+use ResortsController
 use TripsController
 use UsersController

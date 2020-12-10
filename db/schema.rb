@@ -10,18 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_207_194_043) do
-  create_table 'trips', force: :cascade do |t|
-    t.string 'destination'
-    t.string 'notes'
-    t.date 'start_date'
-    t.date 'end_date'
-    t.integer 'user_id'
+ActiveRecord::Schema.define(version: 2020_12_10_011858) do
+
+  create_table "resorts", force: :cascade do |t|
+    t.string "name"
+    t.string "city"
+    t.string "state"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'name'
-    t.string 'email'
-    t.string 'password_digest'
+  create_table "trip_resorts", force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "resort_id"
   end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "destination"
+    t.string "notes"
+    t.date "start_date"
+    t.date "end_date"
+    t.integer "user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+  end
+
 end
