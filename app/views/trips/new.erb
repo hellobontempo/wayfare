@@ -4,9 +4,9 @@
 <label for="create trips"><h1>Create a trip:</h1></label>
 
 <form action="/trips" method="POST">
-  <p><label>Destination:</label> <input type="text" name="destination"></p>
-  <p><label>Start Date:</label> <input type="date" name="start_date"></p>
-  <p><label>End Date:</label> <input type="date" name="end_date"></p>
+  <p><label>Destination:</label> <input type="text" name="trip[destination]"></p>
+  <p><label>Start Date:</label> <input type="date" name="trip[start_date]"></p>
+  <p><label>End Date:</label> <input type="date" name="trip[end_date]"></p>
   <p><label>Choose a Resort:</label> 
         <select name="resort_id">
           <%@resorts.each do |resort|%>

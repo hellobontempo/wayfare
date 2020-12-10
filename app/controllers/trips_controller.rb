@@ -16,15 +16,18 @@ class TripsController < ApplicationController
     redirect_if_not_logged_in
     @trip = Trip.find_by_id(params[:id])
     @user = User.find_by_id(@trip.user_id)
+    @resort = Resort.find_by_id(@trip.resort_ids[0])
     erb :"/trips/show"
   end
 
   post '/trips' do
     redirect_if_not_logged_in
     notes_empty
-    @trip = Trip.new(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date],
-                     notes: @note, user_id: session[:user_id])
+    @trip = Trip.new(params[:trip])
     if !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
+      @trip.notes = @note
+      @trip.user_id = session[:user_id]
+      @trip.resort_ids = params[:resort_id]
       @trip.save
       redirect "/trips/#{@trip.id}"
     end
