@@ -39,8 +39,9 @@ class TripsController < ApplicationController
     @trip = Trip.find_by_id(params[:id])
     redirect_if_not_authorized
     if !@trip.destination.blank? && !@trip.start_date.blank? && !@trip.end_date.blank?
-      @trip.update(destination: params[:destination], start_date: params[:start_date], end_date: params[:end_date],
-                   notes: params[:notes]) #change form to match new form update
+      @trip.notes = params[:notes]
+      @trip.update(params[:trip])
+      @trip.resort_ids = params[:resorts]
       redirect "/trips/#{@trip.id}"
     end
     flash_incomplete_form
@@ -49,6 +50,7 @@ class TripsController < ApplicationController
 
   get '/trips/:id/edit' do
     @trip = Trip.find_by_id(params[:id])
+    @resorts = Resort.order(:state)
     redirect_if_not_authorized
     erb :"/trips/edit"
   end

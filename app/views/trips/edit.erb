@@ -5,11 +5,14 @@
 
 <form action="/trips/<%=@trip.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
-    <p><label>Destination:</label> <input type="text" name="destination" value="<%=@trip.destination%>"></p>
-    <p><label>Start Date:</label> <input type="date" name="start_date" value="<%=@trip.start_date%>"></p>
-    <p><label>End Date:</label> <input type="date" name="end_date" value="<%=@trip.end_date%>"></p>
+    <p><label>Destination:</label> <input type="text" name="trip[destination]" value="<%=@trip.destination%>"></p>
+    <p><label>Start Date:</label> <input type="date" name="trip[start_date]" value="<%=@trip.start_date%>"></p>
+    <p><label>End Date:</label> <input type="date" name="trip[end_date]" value="<%=@trip.end_date%>"></p>
+    <p><label>*Select a Resort:</label><br>
+          <%@resorts.each do |resort|%>
+            <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>" <%='checked' if @trip.resorts.include?(resort) %>><%=resort.name%> - <%=resort.state%></input><br>
+          <%end%>
     <p><label>*Notes:</label> <br><textarea type="text" name="notes"><%=@trip.notes%></textarea><br><small>*not required</small></p>
     <p><input type="submit" value="Update Trip"></p>
 </form>
 
-<!-- <%='checked' if @dj.turntables.include?(turntable) %>><%= turntable.name %></input> -->
