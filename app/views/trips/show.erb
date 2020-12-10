@@ -8,7 +8,7 @@
    <p>Duration: <%=(@trip.end_date - @trip.start_date).round%> Days</p>
    <p>Resort(s):<br>
       <%@resorts.each do |resort|%>
-         <%=resort.name%><br>
+         <a href="<%=resort.url%>" target="_blank"><%=resort.name%></a><br>
       <%end%>
    <p>Notes: <%=@trip.notes%></p>
 <br><br>

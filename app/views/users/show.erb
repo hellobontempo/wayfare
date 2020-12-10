@@ -5,11 +5,11 @@
 <h1>Hi, <%=@user.name%>!</h1>
 
 <h2>Trips &hearts;</h2><br>
-
-<%@user.trips.each do |trip|%>
-  <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%></a><br><br>
+<%@trips = @user.trips%>
+<%@trips.order(:start_date).each do |trip|%>
+  <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.destination%>: <%=trip.start_date.strftime("%m/%d/%y")%>-<%=trip.end_date.strftime("%m/%d/%y")%></a><br><br>
 <%end%>
 <br><br><br>
 <hr>
 
-<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
+<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark"  href="/resorts" role="button">View Resorts</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
