@@ -18,7 +18,7 @@
     font-family: Sans-Serif;
     line-height: 18px;
   }
-
+  
   .wrapper {
     background: #fff;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
@@ -75,7 +75,7 @@
   .branding {
     clear: both;
   }
-
+  
   footer.branding {
     border-top: 2px solid #ccc;
     margin-top: 20px;
