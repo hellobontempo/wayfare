@@ -8,6 +8,7 @@ class TripsController < ApplicationController
 
   get '/trips/new' do
     redirect_if_not_logged_in
+    @resorts = Resort.order(:state)
     erb :"/trips/new"
   end
 

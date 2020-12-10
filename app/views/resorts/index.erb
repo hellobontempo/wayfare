@@ -1,1 +1,5 @@
-<h1>This is the Model's index page.</h1>
+<h1>Resorts on the West Coast</h1>
+
+<%@resorts.each do |resort|%>
+    <a class="btn btn-dark" href="/resorts/<%=resort.id%>" role="button"><%=resort.name%> - <%=resort.state%></a><br><br>
+<%end%>

@@ -1,13 +1,14 @@
 class ResortsController < ApplicationController
 
-  # GET: /resorts
   get "/resorts" do
-    erb :"/resorts/index.html"
+    @resorts = Resort.order(:state)
+    erb :"/resorts/index"
   end
 
-  # GET: /resorts/5
+
   get "/resorts/:id" do
-    erb :"/resorts/show.html"
+    @resort = Resort.find_by(params[:id])
+    erb :"/resorts/show"
   end
 
 end
