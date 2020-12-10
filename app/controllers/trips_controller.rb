@@ -45,7 +45,7 @@ class TripsController < ApplicationController
       redirect "/trips/#{@trip.id}"
     end
     flash_incomplete_form
-    redirect "/trips/#{@trip.id}/edit" #add change resort 
+    redirect "/trips/#{@trip.id}/edit" 
   end
 
   get '/trips/:id/edit' do

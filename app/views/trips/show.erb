@@ -1,11 +1,11 @@
 <a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark"  href="/users/<%=current_user.id%>" role="button">Home</a>
 
 <hr>
-<h1>Trip to <%=@trip.name%></h1>
+<h1>Trip: <%=@trip.name%></h1>
 
    <p>Start Date: <%=@trip.start_date.strftime("%A, %B %e, %Y")%></p>
    <p>End Date: <%=@trip.end_date.strftime("%A, %B %e, %Y")%></p>
-   <p>Duration: <%=(@trip.end_date - @trip.start_date).round%> Days</p>
+   <p>Duration: <%=(@trip.end_date - @trip.start_date + 1).round%> Days</p>
    <p>Resort(s):<br>
       <%@resorts.each do |resort|%>
          <a href="<%=resort.url%>" target="_blank"><%=resort.name%></a><br>
