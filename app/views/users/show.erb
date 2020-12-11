@@ -9,7 +9,7 @@
 <hr>
 <a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> 
 <hr>
-  <h3>Trip Log</h3><br>
+  <h3><b>trips:</b></h3><br>
   <%@trips = @user.trips%>
   <%@trips.order(:start_date).each do |trip|%>
     <a class="btn btn-secondary"  href="/trips/<%=trip.id%>"role="button"><%=trip.name%>: <%=trip.start_date.strftime("%m/%d/%y")%>-<%=trip.end_date.strftime("%m/%d/%y")%></a><br><br>

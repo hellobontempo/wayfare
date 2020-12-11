@@ -2,7 +2,6 @@
   <p style="color:red;"><%=flash[:message]%></p>
 <% end %> <br>
 <label for="trip edit"><h2>Edit Trip</h2></label>
-
 <form action="/trips/<%=@trip.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <p><label>Name:</label> <input type="text" name="trip[name]" value="<%=@trip.name%>"></p>

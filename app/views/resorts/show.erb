@@ -3,10 +3,18 @@
 <h1><%=@resort.name%> Resort</h1>
 
 
-<h4><%=@resort.city%>, <%=@resort.state%></h4>
+<p><%=@resort.city%>, <%=@resort.state%> <br> <a class="btn btn-dark"  href="<%=@resort.url%>"role="button" target="_blank">Visit Resort Website</a></p>
 
-
-<a class="btn btn-dark"  href="<%=@resort.url%>"role="button" target="_blank">Visit Resort Website</a>
-
-
-
+<br><br>
+<label><h2><small>add/remove from trips:</small></h2></label>
+<form action="/resorts/<%=@resort.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+          <%@user.trips.each do |trip|%>
+            <input type="checkbox" name="trips[]" id="<%=trip.name%>" value="<%=trip.id%>" <%='checked' if @resort.trips.include?(trip) %>> <%=trip.name%> - <%=trip.start_date.strftime("%m/%d/%y")%></input><br>
+          <%end%>
+    <br>
+    <br>
+    <input type="submit" class="btn btn-dark" value="Update Trip">
+</form>
+        
+    
