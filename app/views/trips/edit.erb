@@ -9,7 +9,7 @@
     <p><label>End Date:</label> <input type="date" name="trip[end_date]" value="<%=@trip.end_date%>"></p>
     <p><label>*Select a Resort:</label><br>
           <%@resorts.each do |resort|%>
-            <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>" <%='checked' if @trip.resorts.include?(resort) %>><%=resort.name%> - <%=resort.state%><br>
+            <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>" <%='checked' if @trip.resorts.include?(resort) %>><%=resort.name%> - <%=resort.state.code%><br>
           <%end%>
     <p><label>*Notes:</label> <br><textarea type="text" name="notes"><%=@trip.notes%></textarea><br><small>*not required</small></p>
     <p><input type="submit" value="Update Trip"></p>

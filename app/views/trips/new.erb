@@ -11,7 +11,7 @@
   <p><label>End Date:</label> <input type="date" name="trip[end_date]"></p>
   <p><label>*Select a Resort:</label><br>
           <%@resorts.each do |resort|%>
-            <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>"><%=resort.name%> - <%=resort.state%><br>
+            <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>"><%=resort.name%> - <%=resort.state.code%><br>
           <%end%>
     
      

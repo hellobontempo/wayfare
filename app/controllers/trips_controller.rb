@@ -8,7 +8,7 @@ class TripsController < ApplicationController
 
   get '/trips/new' do
     redirect_if_not_logged_in
-    @resorts = Resort.order(:state)
+    @resorts = Resort.order(:state_id)
     erb :"/trips/new"
   end
 
@@ -50,7 +50,7 @@ class TripsController < ApplicationController
 
   get '/trips/:id/edit' do
     @trip = Trip.find_by_id(params[:id])
-    @resorts = Resort.order(:state)
+    @resorts = Resort.order(:state_id)
     redirect_if_not_authorized
     erb :"/trips/edit"
   end
