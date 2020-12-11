@@ -1,9 +1,12 @@
-<a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark"  href="/users/<%=current_user.id%>" role="button">Home</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
+<a class="btn btn-dark"  href="/trips" role="button">Trip Index</a> <a class="btn btn-dark"  href="/users/<%=current_user.id%>" role="button">My Trips</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
 <hr>
 
-<h1>Ski/Snowboard Resorts on the West Coast</h1>
+<h1>Ski/Snowboard Resorts</h1>
 
-<%@resorts.each do |resort|%>
-    <a class="btn btn-dark" href="/resorts/<%=resort.id%>" role="button"><%=resort.name%> - <%=resort.state%></a><br><br>
-<%end%>
+    <%@resorts.each do |resort|%>
+     <h2><label for="location"><%=resort.state%></label></h2>
+        <%@resorts.state_resorts(resort.state).each do |resort|%>
+                <a class="btn btn-dark" href="/resorts/<%=resort.id%>" role="button"><%=resort.name%></a><br><br>
+    <%end%>
+    <%end%>
 
