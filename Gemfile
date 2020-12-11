@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'activerecord', '~> 5.2.4', require: 'active_record'
 gem 'bcrypt'
+gem 'faker'
 gem 'pry'
 gem 'rake'
 gem 'require_all'

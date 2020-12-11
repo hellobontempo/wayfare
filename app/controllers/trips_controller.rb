@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   get '/trips' do
     redirect_if_not_logged_in
-    @trips = Trip.order(:user_id)
+    @trips = Trip.order(:start_date)
     @user = current_user
     erb :"/trips/index"
   end
