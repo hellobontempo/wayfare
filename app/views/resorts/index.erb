@@ -4,9 +4,9 @@
 <h1>Ski/Snowboard Resorts</h1>
 
     <%@resorts.each do |resort|%>
-     <h2><label for="location"><%=resort.state%></label></h2>
-        <%@resorts.state_resorts(resort.state).each do |resort|%>
-                <a class="btn btn-dark" href="/resorts/<%=resort.id%>" role="button"><%=resort.name%></a><br><br>
+        <h2><label for="location"><%=resort.state%></label></h2>
+            <%@resorts.state_resorts(resort.state).each do |resort|%>
+                    <a class="btn btn-dark" href="/resorts/<%=resort.id%>" role="button"><%=resort.name%></a><br><br>
     <%end%>
     <%end%>
 
