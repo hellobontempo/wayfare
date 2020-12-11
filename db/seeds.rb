@@ -1,5 +1,3 @@
-require 'faker'
-
 State.create(name: "Colorado", code: "CO")
 State.create(name: "Washington", code: "WA")
 State.create(name: "Utah", code: "UT")
