@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_10_215022) do
+ActiveRecord::Schema.define(version: 2020_12_11_193427) do
 
   create_table "resorts", force: :cascade do |t|
     t.string "name"
     t.string "city"
     t.string "state"
     t.string "url"
+    t.integer "state_id"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
   end
 
   create_table "trip_resorts", force: :cascade do |t|
