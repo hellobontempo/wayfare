@@ -31,6 +31,7 @@ class UsersController < ApplicationController
 
   post '/users' do
     user = User.new(params)
+    binding.pry
     if user.email.blank? || user.password.blank?
       flash_incomplete_form
       redirect '/users/new'
