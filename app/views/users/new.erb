@@ -1,12 +1,10 @@
 <% if flash(:message) %>
   <p style="color:red;"><%=flash[:message]%></p>
 <% end %> 
-<h1>Sign up:</h1>
-<h4>We're excited to have you!</h4><br>
-<br><br>
+<h2>Sign Up:</h2>
 <form action="/users" method="POST">
   <p><label>Name:</label><input type="text" name="name"></p>
   <p><label>Email:</label><input type="email" name="email"></p>
   <p><label>Password:</label><input type="password" name="password"></p>
-  <p><input type="submit" value="Sign Up"></p>
+  <p><input class="btn btn-dark"  type="submit" value="Sign Up"> <a class="btn btn-dark"  href="/" role="button">Nevermind</a></p>
 </form>

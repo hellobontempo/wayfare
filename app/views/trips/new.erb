@@ -1,7 +1,9 @@
 <% if flash(:message) %>
   <p style="color:red;"><%=flash[:message]%></p>
-<% end %> <br>
-<label for="create trips"><h1>Create a trip:</h1></label>
+<% end %> 
+<hr>
+
+<label for="create trips"><h2>Create a trip:</h2></label>
 
 <form action="/trips" method="POST">
   <p><label>Name:</label> <input type="text" name="trip[name]"></p>
@@ -14,6 +16,7 @@
     
      
   <p><label>*Notes:</label><br><textarea type="text" name="notes"></textarea><br><small>*not required</small></p>
-  <p><input type="submit" value="Create Trip"></p>
+  <p><input type="submit" class="btn btn-dark" value="Create Trip"></p>
+  <a class="btn btn-dark"  href="/users/<%=current_user.id%>" role="button">Nevermind</a><br>
 </form>
 

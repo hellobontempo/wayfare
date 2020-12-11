@@ -3,14 +3,14 @@
   <p style="color:magenta;"><%=flash[:message]%></p>
 <%end%> 
 
-<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> <a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark"  href="/resorts" role="button">View Resorts</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
+<a class="btn btn-dark"  href="/trips" role="button">View All Trips</a> <a class="btn btn-dark"  href="/resorts" role="button">View Resorts</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a> 
 <hr>
 <h1>Hi, <%=@user.name%>!</h1>
 <hr>
-<h3>My Trips</h3><br>
-<%@trips = @user.trips%>
-<%@trips.order(:start_date).each do |trip|%>
-  <a class="btn btn-dark"  href="/trips/<%=trip.id%>"role="button"><%=trip.name%>: <%=trip.start_date.strftime("%m/%d/%y")%>-<%=trip.end_date.strftime("%m/%d/%y")%></a><br><br>
-<%end%>
-<br><br><br>
-
+<a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a> 
+<hr>
+  <h3>Trip Log</h3><br>
+  <%@trips = @user.trips%>
+  <%@trips.order(:start_date).each do |trip|%>
+    <a class="btn btn-secondary"  href="/trips/<%=trip.id%>"role="button"><%=trip.name%>: <%=trip.start_date.strftime("%m/%d/%y")%>-<%=trip.end_date.strftime("%m/%d/%y")%></a><br><br>
+  <%end%>

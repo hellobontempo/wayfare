@@ -1,7 +1,8 @@
 <a class="btn btn-dark"  href="/trips/new"role="button">Create a New Trip</a>
-<a class="btn btn-dark"  href="/users/<%=@user.id%>" role="button">Return Home</a>
+<a class="btn btn-dark"  href="/users/<%=current_user.id%>" role="button">Return Home</a> <a class="btn btn-dark" href="/logout" role="button">Log Out</a>
 <hr>
-<h1>Trip Index</h2>
+
+<label for="trip index"><h2>Trip Index</h2></label><br>
 
 
 <%@trips.order(:start_date).each do |trip|%>
