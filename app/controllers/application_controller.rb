@@ -9,22 +9,28 @@ class ApplicationController < Sinatra::Base
     set :show_exceptions, false
   end
 
+
   get '/' do
     redirect_if_logged_in
     erb :welcome
   end
 
-  not_found do
-    flash[:message] = "Whoops, that didn't work"
+  error 500 do
+    flash[:message] = "whoops - that didn't work"
     redirect '/'
   end
+
+  # not_found do
+  #   flash[:message] = "Whoops - that didn't work"
+  #   redirect '/'
+  # end
 
   get '/error' do
     erb :error
   end
 
   error ActiveRecord::RecordNotFound do
-    redirect to '/'
+    redirect '/'
   end
 
   helpers do
