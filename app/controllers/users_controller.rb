@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   post '/users' do
     user = User.new(params)
-    if user.email.blank? || user.password.blank?
+    if user.email.blank? || user.password.blank? || user.name.blank?
       flash_incomplete_form
       redirect '/users/new'
     elsif User.find_by_email(params['email'])

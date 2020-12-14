@@ -17,6 +17,11 @@ class ApplicationController < Sinatra::Base
     erb :error
   end
 
+  error ActiveRecord::RecordNotFound do
+    flash[:message] = "Whoopsy"
+      '/'
+  end
+
   helpers do
     def flash_incomplete_form
       flash[:message] = '*Error* Form missing entries - please fill out completely.'
