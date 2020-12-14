@@ -20,11 +20,6 @@ class ApplicationController < Sinatra::Base
     redirect '/'
   end
 
-  # not_found do
-  #   flash[:message] = "Whoops - that didn't work"
-  #   redirect '/'
-  # end
-
   get '/error' do
     erb :error
   end
