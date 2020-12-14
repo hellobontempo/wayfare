@@ -6,6 +6,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     register Sinatra::Flash
     set :session_secret, 'wlajal23ljwljlwirg2'
+    set :show_exceptions, false
   end
 
   get '/' do
@@ -13,13 +14,17 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
+  not_found do
+    flash[:message] = "Whoops, that didn't work"
+    redirect '/'
+  end
+
   get '/error' do
     erb :error
   end
 
   error ActiveRecord::RecordNotFound do
-    flash[:message] = "Whoopsy"
-      '/'
+    redirect to '/'
   end
 
   helpers do
