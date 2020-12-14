@@ -40,9 +40,10 @@ class TripsController < ApplicationController
     redirect_if_not_authorized
     if @trip.update(params[:trip]) == false 
       flash_incomplete_form
-      redirect "/trips/#{@trip.id}/edit" 
+      redirect "/trips/#{trip.id}/edit" 
     end
-    @trip.notes = params[:notes]
+    notes_empty
+    @trip.notes = @note
     @trip.update(params[:trip])
     @trip.resort_ids = params[:resorts]
     redirect "/trips/#{@trip.id}"

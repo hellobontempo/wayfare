@@ -3,7 +3,6 @@ class ResortsController < ApplicationController
   get "/resorts" do
     redirect_if_not_logged_in
     @states = State.order(:code)
-  
     erb :"/resorts/index"
   end
 

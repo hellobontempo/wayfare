@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   get '/users/:id' do
+    redirect_if_not_logged_in
     @user = User.find_by_id(params[:id])
     if @user != current_user
       erb :error
@@ -19,10 +20,10 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect "/users/#{@user.id}"
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect "/users/#{user.id}"
     else
       flash[:message] = 'Invalid entry. Try again, please!'
       redirect '/users/login'

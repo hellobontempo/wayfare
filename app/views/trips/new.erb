@@ -8,7 +8,8 @@
 <form action="/trips" method="POST">
   <p><label>Name:</label> <input type="text" name="trip[name]"></p>
   <p><label>Start Date:</label> <input type="date" name="trip[start_date]"></p>
-  <p><label>End Date:</label> <input type="date" name="trip[end_date]"></p>
+  <p><label>End Date:</label> <input type="date" name="trip[end_date]"><br>
+  <i><small>A trip cannot end before it has started.</small></i></p>
   <p><label>*Select a Resort:</label><br>
           <%@resorts.each do |resort|%>
             <input type="checkbox" name="resorts[]" id="<%=resort.name%>" value="<%=resort.id%>"><%=resort.name%> - <%=resort.state.code%><br>

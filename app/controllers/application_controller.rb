@@ -15,8 +15,13 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  error 500 do
-    flash[:message] = "whoops - that didn't work"
+  # error 500 do
+  #   flash[:message] = "whoops - that didn't work"
+  #   redirect '/'
+  # end
+
+  error 404 do
+    flash[:message] = "whoops - that page doesn't exist"
     redirect '/'
   end
 
@@ -30,7 +35,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def flash_incomplete_form
-      flash[:message] = '*Error* Form missing entries - please fill out completely.'
+      flash[:message] = '*Error* Form data missing or incorrect.'
     end
 
     def logged_in?
