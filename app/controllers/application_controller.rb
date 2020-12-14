@@ -15,10 +15,10 @@ class ApplicationController < Sinatra::Base
     erb :welcome
   end
 
-  # error 500 do
-  #   flash[:message] = "whoops - that didn't work"
-  #   redirect '/'
-  # end
+  error 500 do
+    flash[:message] = "whoops - that didn't work"
+    redirect '/'
+  end
 
   error 404 do
     flash[:message] = "whoops - that page doesn't exist"
