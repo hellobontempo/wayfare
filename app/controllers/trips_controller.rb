@@ -23,7 +23,7 @@ class TripsController < ApplicationController
   post '/trips' do
     redirect_if_not_logged_in
     @trip = Trip.new(params[:trip])
-    if @trip.valid? && @trip.date_check
+    if @trip.valid? || @trip.date_check
       notes_empty
       @trip.notes = @note
       @trip.user_id = session[:user_id]
@@ -38,16 +38,17 @@ class TripsController < ApplicationController
   patch '/trips/:id' do
     @trip = Trip.find_by_id(params[:id])
     redirect_if_not_authorized
-    binding.pry
-    if @trip.update(params[:trip]) == false && @trip.date_check == false
+    form = Trip.new(params[:trip])
+    if form.valid? && form.date_check == true
+      notes_empty
+      @trip.notes = @note
+      @trip.update(params[:trip])
+      @trip.resort_ids = params[:resorts]
+      redirect "/trips/#{@trip.id}"
+    else
       flash_incomplete_form
-      redirect "/trips/#{trip.id}/edit" 
+      redirect "/trips/#{@trip.id}/edit" 
     end
-    notes_empty
-    @trip.notes = @note
-    @trip.update(params[:trip])
-    @trip.resort_ids = params[:resorts]
-    redirect "/trips/#{@trip.id}"
   end
 
   get '/trips/:id/edit' do
