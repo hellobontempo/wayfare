@@ -24,7 +24,7 @@ class TripsController < ApplicationController
     redirect_if_not_logged_in
     notes_empty
     @trip = Trip.new(params[:trip])
-    if @trip.valid?
+    if !@trip.name.empty? || !@trip.start_date.empty? || !@trip.end_date.empty? 
       @trip.notes = @note
       @trip.user_id = session[:user_id]
       @trip.resort_ids = params[:resorts]
