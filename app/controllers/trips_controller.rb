@@ -1,11 +1,17 @@
 class TripsController < ApplicationController
+
+  get '/trips/upcoming' do
+    @trips = Trip.where("start_date > ?", Date.today).order(:start_date)
+    erb :"/trips/upcoming"
+  end
+  
   get '/trips' do
     redirect_if_not_logged_in
     @users = User.order(:name)
     @user = current_user
     erb :"/trips/index"
   end
-
+ 
   get '/trips/new' do
     redirect_if_not_logged_in
     @resorts = Resort.order(:state_id)
