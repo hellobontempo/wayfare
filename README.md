@@ -7,7 +7,7 @@ Run `bundle install` to get all of the necessary gems. To maximize the functiona
 
 ## Attribution
 Thanks to the Corneal gem for creating such a wonderful launch pad to develop this application. 
-[Corneal]( https://github.com/thebrianemory/corneal)
+[Link to Corneal Gem]( https://github.com/thebrianemory/corneal)
 
 
 ## Contributors 
