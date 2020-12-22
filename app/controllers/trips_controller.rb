@@ -23,7 +23,7 @@ class TripsController < ApplicationController
   post '/trips' do
     redirect_if_not_logged_in
     @trip = Trip.new(params[:trip])
-    if @trip.valid? || @trip.date_check
+    if @trip.valid? && @trip.date_check
       notes_empty
       @trip.notes = @note
       @trip.user_id = session[:user_id]
