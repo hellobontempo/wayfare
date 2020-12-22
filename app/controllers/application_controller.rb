@@ -35,7 +35,7 @@ class ApplicationController < Sinatra::Base
 
   helpers do
     def flash_incomplete_form
-      flash[:message] = '*Error* Form data missing or incorrect.'
+      flash[:message] = '*Error - Incomplete or incorrect entries*'
     end
 
     def logged_in?
