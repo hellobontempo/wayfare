@@ -29,13 +29,9 @@ class ApplicationController < Sinatra::Base
     erb :error
   end
 
-  error ActiveRecord::RecordNotFound do
-    redirect '/'
-  end
-
   helpers do
     def flash_incomplete_form
-      flash[:message] = '*Error - Incomplete or incorrect entries*'
+      flash[:message] = '*error - incomplete or incorrect entries*'
     end
 
     def logged_in?
